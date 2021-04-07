@@ -16,6 +16,7 @@ class SOLUTION:
             PopDec = PopDec[0]
             self.Problem = config.problem
             self.Population = [SOLUTION() for i in range(np.size(PopDec, 0))]
+            PopDec = self.Problem.CalDec(PopDec)
             self.decs = PopDec
             self.objs = self.Problem.CalObj(PopDec)
             for i in range(np.size(PopDec, 0)):
@@ -26,3 +27,4 @@ class SOLUTION:
             self.Problem = config.problem
             self.PopDec = []
             self.PopObj = []
+
