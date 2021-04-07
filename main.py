@@ -1,10 +1,8 @@
-# Coded by Feng in 2021-04-06
+# Programed by Feng in 2021-04-06
 # Copyright © 2021 Feng Yang. All rights reserved
 
 
-import numpy as np
 import config
-import Problems
 from Problems.Mesh_Simplification.Mesh_Simplification import Mesh_Simplification
 from Algorithms.PSO.PSO import PSO
 
@@ -14,6 +12,7 @@ if __name__ == '__main__':
     config.N = 10
     config.D = 10
     config.encoding = 'permutation'
+    config.maxFEs = 50
 
     # Problem initialization
     Problem = Mesh_Simplification('test1.obj', 0.9)
@@ -23,3 +22,4 @@ if __name__ == '__main__':
     PSO = PSO()
     # Start the optimization process
     Population = PSO.Optimization()
+    print(Population.PopObj)
