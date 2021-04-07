@@ -35,5 +35,5 @@ class PROBLEM:
             PopDec = np.argsort(np.random.random((self.N, self.D)))
         return SOLUTION(PopDec)
 
-    def CalObj(self, *args):
+    def CalObj(self, *PopDec):
         pass
