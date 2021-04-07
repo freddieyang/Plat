@@ -23,7 +23,7 @@ class Mesh_Simplification(PROBLEM):
 
     # Calculate the objective of a solution
     def CalObj(self, PopDec):
-        PopObj = np.zeros((len(PopDec), self.M))
+        PopObj = np.zeros((np.size(PopDec, 0), self.M))
         for i in range(self.N):
             vertex = copy.copy(self.vertex)
             facet = copy.copy(self.facet) - 1
@@ -32,8 +32,8 @@ class Mesh_Simplification(PROBLEM):
             edge_status = np.ones(self.number_of_edge)
             j = 0
             while self.number_of_vertex - new_vertex_count >= self.ratio * self.number_of_vertex:
-                if edge_status[PopDec[i, j]] == 1:
-                    select_edge = edge[PopDec[i, j], :]
+                if edge_status[PopDec[i][j]] == 1:
+                    select_edge = edge[PopDec[i][j], :]
                     i_0 = select_edge[0]
                     i_1 = select_edge[1]
                     v_0 = vertex[i_0, :]
@@ -63,7 +63,7 @@ class Mesh_Simplification(PROBLEM):
                     facet = np.delete(facet, facet_delete_index, 0)
                     vertex = np.delete(vertex, i_1, 0)
                     edge_status[np.where(edge[:, 0] - edge[:, 1] == 0)[0]] = 0
-                    edge_status[PopDec[i, j]] = 0
+                    edge_status[PopDec[i][j]] = 0
                     j = j + 1
                     new_vertex_count = new_vertex_count + 1
                 else:
