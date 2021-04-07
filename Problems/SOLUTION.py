@@ -1,4 +1,5 @@
 import config
+import numpy as np
 
 
 # The class of a solution. This class stores all the data of the solution.
@@ -12,6 +13,9 @@ import config
 class SOLUTION:
     def __init__(self, PopDec):
         self.Problem = config.problem
-        self.PopDec = PopDec
+        if config.encoding == 'real':
+            self.PopDec = PopDec
+        elif config.encoding == 'permutation':
+            self.PopDec = np.argsort(self.PopDec)
         self.PopObj = self.Problem.CalObj(self.PopDec)
         self.Problem.FE = self.Problem.FE + len(self.PopObj)
