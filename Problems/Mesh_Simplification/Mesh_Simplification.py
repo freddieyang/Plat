@@ -60,7 +60,8 @@ class Mesh_Simplification(PROBLEM):
                         for t in range(np.size(edge_update_index, 1)):
                             edge[edge_update_index[0][t], edge_update_index[1][t]] = \
                                 edge[edge_update_index[0][t], edge_update_index[1][t]] - 1
-                    facet = np.delete(facet, facet_delete_index, 0)
+                    if len(facet_delete_index)>0:
+                        facet = np.delete(facet, facet_delete_index, 0)
                     vertex = np.delete(vertex, i_1, 0)
                     edge_status[np.where(edge[:, 0] - edge[:, 1] == 0)[0]] = 0
                     edge_status[PopDec[i][j]] = 0
