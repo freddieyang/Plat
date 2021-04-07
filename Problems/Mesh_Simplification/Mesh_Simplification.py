@@ -4,11 +4,12 @@ from .Model import Model  # Notice the '.'
 import copy
 from .file_operation import write_file
 import os, subprocess
+import sys
 
 
 class Mesh_Simplification(PROBLEM):
     # Initialization of the problem
-    def __init__(self, filename, parameter):
+    def __init__(self, filename, parameter, output):
         super().__init__()
         self.filename = filename
         self.Model = Model(filename)
@@ -20,10 +21,14 @@ class Mesh_Simplification(PROBLEM):
         self.number_of_edge = len(self.edge)
         self.D = len(self.edge)
         self.ratio = parameter
+        self.output = output
 
     # Calculate the objective of a solution
     def CalObj(self, PopDec):
         PopObj = np.zeros((np.size(PopDec, 0), self.M))
+        best_vertex = []
+        best_facet = []
+        best_fitness = sys.maxsize
         for i in range(self.N):
             vertex = copy.copy(self.vertex)
             facet = copy.copy(self.facet) - 1
@@ -60,7 +65,7 @@ class Mesh_Simplification(PROBLEM):
                         for t in range(np.size(edge_update_index, 1)):
                             edge[edge_update_index[0][t], edge_update_index[1][t]] = \
                                 edge[edge_update_index[0][t], edge_update_index[1][t]] - 1
-                    if len(facet_delete_index)>0:
+                    if len(facet_delete_index) > 0:
                         facet = np.delete(facet, facet_delete_index, 0)
                     vertex = np.delete(vertex, i_1, 0)
                     edge_status[np.where(edge[:, 0] - edge[:, 1] == 0)[0]] = 0
@@ -78,5 +83,12 @@ class Mesh_Simplification(PROBLEM):
             start_position = out.find('Hausdorff distance:') + 20
             end_position = out.find('Hausdorff distance:') + 50
             tmp_str = out[start_position:end_position]
-            PopObj[i] = float(tmp_str.split(' ')[0])
+            fitness = float(tmp_str.split(' ')[0])
+            PopObj[i] = fitness
+            if fitness < best_fitness:
+                best_vertex = vertex
+                best_facet = facet
+            if self.output == 1:
+                output_path = '\\outputs\\result.obj'
+                write_file(best_vertex, best_facet, current_path + output_path)
         return PopObj
