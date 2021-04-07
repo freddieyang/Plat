@@ -6,12 +6,12 @@ import numpy as np
 import config
 import Problems
 from Problems.Mesh_Simplification.Mesh_Simplification import Mesh_Simplification
-from Algorithms.DE.DE import DE
+from Algorithms.PSO.PSO import PSO
 
 if __name__ == '__main__':
     # General parameter settings
     config.M = 1
-    config.N = 100
+    config.N = 10
     config.D = 10
     config.encoding = 'permutation'
 
@@ -20,7 +20,6 @@ if __name__ == '__main__':
     config.problem = Problem
 
     # Algorithm initialization
-    DE = DE()
+    PSO = PSO()
     # Start the optimization process
-    Population = DE.Optimization()
-
+    Population = PSO.Optimization()
