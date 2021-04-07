@@ -11,11 +11,18 @@ import numpy as np
 
 
 class SOLUTION:
-    def __init__(self, PopDec):
-        self.Problem = config.problem
-        if config.encoding == 'real':
-            self.PopDec = PopDec
-        elif config.encoding == 'permutation':
-            self.PopDec = np.argsort(self.PopDec)
-        self.PopObj = self.Problem.CalObj(self.PopDec)
-        self.Problem.FE = self.Problem.FE + len(self.PopObj)
+    def __init__(self, *PopDec):
+        if len(PopDec) == 1:
+            PopDec = PopDec[0]
+            self.Problem = config.problem
+            self.Population = [SOLUTION() for i in range(np.size(PopDec, 0))]
+            self.decs = PopDec
+            self.objs = self.Problem.CalObj(PopDec)
+            for i in range(np.size(PopDec, 0)):
+                self.Population[i].PopDec = self.decs[i, :]
+                self.Population[i].PopObj = self.objs[i]
+                self.Population[i].Problem.FE = self.Population[i].Problem.FE + len(self.Population[i].PopObj)
+        else:
+            self.Problem = config.problem
+            self.PopDec = []
+            self.PopObj = []
