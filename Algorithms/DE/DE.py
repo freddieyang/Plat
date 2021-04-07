@@ -16,7 +16,7 @@ class DE(ALGORITHM):
     def Optimization(self):
         Population = self.Problem.Initialization()
 
-        while ALGORITHM().NotTerminated():
+        while ALGORITHM().NotTerminated(Population):
             pass
 
         return Population
