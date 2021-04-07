@@ -8,5 +8,7 @@ M = 1
 D = 10
 # Encoding: 'real', 'permutation'
 encoding = 'real'
+# Max function evaluation
+maxFEs = 10000
 # Record the problem
 problem = 0
