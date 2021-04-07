@@ -10,8 +10,9 @@ import config
 # NotTerminated: check whether the optimization is terminated
 
 class ALGORITHM:
-    def __init__(self):
+    def __init__(self, *parameter):
         self.Problem = config.problem
+        self.parameter = parameter
 
     def NotTerminated(self):
         notterminated = self.Problem.FE <= self.Problem.maxFEs

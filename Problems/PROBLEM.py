@@ -20,11 +20,12 @@ from Problems.SOLUTION import SOLUTION
 
 
 class PROBLEM:
-    def __init__(self):
+    def __init__(self, *parameter):
         self.N = config.N
         self.D = config.D
         self.M = config.M
         self.encoding = config.encoding
+        self.parameter = parameter
         self.FE = 0
         self.maxFEs = 10000
 
