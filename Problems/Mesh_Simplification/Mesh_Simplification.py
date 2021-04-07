@@ -5,6 +5,7 @@ import copy
 from .file_operation import write_file
 import os, subprocess
 import sys
+import config
 
 
 class Mesh_Simplification(PROBLEM):
@@ -28,7 +29,6 @@ class Mesh_Simplification(PROBLEM):
         PopObj = np.zeros((np.size(PopDec, 0), self.M))
         best_vertex = []
         best_facet = []
-        best_fitness = sys.maxsize
         for i in range(self.N):
             vertex = copy.copy(self.vertex)
             facet = copy.copy(self.facet) - 1
@@ -83,12 +83,16 @@ class Mesh_Simplification(PROBLEM):
             start_position = out.find('Hausdorff distance:') + 20
             end_position = out.find('Hausdorff distance:') + 50
             tmp_str = out[start_position:end_position]
-            fitness = float(tmp_str.split(' ')[0])
+            try:
+                fitness = float(tmp_str.split(' ')[0])
+            except ValueError:
+                fitness = sys.maxsize
             PopObj[i] = fitness
-            if fitness < best_fitness:
+            if fitness < config.best_fitness:
+                config.best_fitness = fitness
                 best_vertex = vertex
                 best_facet = facet
-            if self.output == 1:
-                output_path = '\\outputs\\result.obj'
-                write_file(best_vertex, best_facet, current_path + output_path)
+                if self.output == 1:
+                    output_path = '\\outputs\\result.obj'
+                    write_file(best_vertex, best_facet, current_path + output_path)
         return PopObj
