@@ -1,4 +1,5 @@
 # Config file
+import sys
 
 # Population size
 N = 100
@@ -12,3 +13,5 @@ encoding = 'real'
 maxFEs = 10000
 # Record the problem
 problem = 0
+# Record the best fitness
+best_fitness = sys.maxsize
