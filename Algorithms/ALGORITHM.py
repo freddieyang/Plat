@@ -16,7 +16,7 @@ class ALGORITHM:
 
     def NotTerminated(self):
         notterminated = self.Problem.FE < self.Problem.maxFEs
-        print('完成百分比：%f' % (self.Problem.FE / self.Problem.maxFEs))
+        print('完成百分比：%f' % (self.Problem.FE / self.Problem.maxFEs) * 100)
         return notterminated
 
     def Optimization(self):
