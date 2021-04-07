@@ -27,14 +27,24 @@ class PROBLEM:
         self.encoding = config.encoding
         self.parameter = parameter
         self.FE = 0
-        self.maxFEs = 10000
+        self.maxFEs = config.maxFEs
 
     def Initialization(self):
-        if self.encoding == 'real':
-            PopDec = np.random.random((self.N, self.D))
-        elif self.encoding == 'permutation':
-            PopDec = np.argsort(np.random.random((self.N, self.D)))
+        PopDec = np.random.random((self.N, self.D))
         return SOLUTION(PopDec)
 
+    def CalDec(self, *PopDec):
+        if len(PopDec) == 1:
+            PopDec = PopDec[0]
+            if self.encoding == 'real':
+                PopDec = PopDec
+            elif self.encoding == 'permutation':
+                PopDec = np.argsort(PopDec)
+        return PopDec
+
     def CalObj(self, *PopDec):
-        pass
+        if len(PopDec) == 1:
+            PopObj = np.zeros(np.size(PopDec, 0), 1)
+            return PopObj
+        else:
+            pass
