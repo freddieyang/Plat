@@ -1,5 +1,6 @@
 from Algorithms.ALGORITHM import ALGORITHM
 
+
 class DE(ALGORITHM):
     def __init__(self, *parameter):
         super().__init__()
