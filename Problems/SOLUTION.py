@@ -27,4 +27,3 @@ class SOLUTION:
             self.Problem = config.problem
             self.PopDec = []
             self.PopObj = []
-
