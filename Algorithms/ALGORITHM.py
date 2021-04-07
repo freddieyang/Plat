@@ -16,10 +16,6 @@ class ALGORITHM:
 
     def NotTerminated(self, *Population):
         if len(Population) > 0:
-            Population = Population[0]
-            current_best_fitness = min(Population.objs)[0]
-            if current_best_fitness < config.best_fitness:
-                config.best_fitness = current_best_fitness
             print('完成百分比：%f%%, 适应度值：%f。' % (self.Problem.FE * 100 / self.Problem.maxFEs, config.best_fitness))
         else:
             print('完成百分比：%f%%。' % (self.Problem.FE * 100 / self.Problem.maxFEs))
