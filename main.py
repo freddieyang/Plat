@@ -3,8 +3,8 @@
 
 
 import config
-from Problems.Mesh_Simplification.Mesh_Simplification import Mesh_Simplification
-from Algorithms.PSO.PSO import PSO
+import Problems
+import Algorithms
 
 if __name__ == '__main__':
     # General parameter settings
@@ -15,11 +15,11 @@ if __name__ == '__main__':
     config.maxFEs = 1000
 
     # Problem initialization
-    Problem = Mesh_Simplification('dinosaur.obj', 0.9, 1)
+    Problem = Problems.Mesh_Simplification('dinosaur.obj', 0.9, 1)
     config.problem = Problem
 
     # Algorithm initialization
-    PSO = PSO(0.5)
+    PSO = Algorithms.PSO(0.5)
     # Start the optimization process
     Population = PSO.Optimization()
     print('最佳适应度值：%f' % config.best_fitness)
