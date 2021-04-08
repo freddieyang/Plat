@@ -1,4 +1,8 @@
+import numpy as np
+
 from Algorithms.ALGORITHM import ALGORITHM
+from Algorithms.Operators.OperatorDE import OperatorDE
+from Algorithms.Operators.TournamentSelection import TournamentSelection
 
 
 class DE(ALGORITHM):
@@ -17,6 +21,10 @@ class DE(ALGORITHM):
         Population = self.Problem.Initialization()
 
         while ALGORITHM().NotTerminated(Population):
-            pass
-
+            MatingPool = TournamentSelection(3, Population.Problem.N, Population)
+            Offspring = OperatorDE(Population, MatingPool, self.CR, self.F)
+            replace = np.where(Offspring.objs < Population.objs)[0]
+            np.array(Population.Population)[replace] = np.array(Offspring.Population)[replace]
+            np.array(Population.objs)[replace] = np.array(Offspring.objs)[replace]
+            np.array(Population.decs)[replace] = np.array(Offspring.decs)[replace]
         return Population
