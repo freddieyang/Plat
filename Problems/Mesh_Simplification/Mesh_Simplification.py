@@ -87,7 +87,7 @@ class Mesh_Simplification(PROBLEM):
             # tmp_str = out[start_position:end_position]
             try:
                 fitness = float(re.findall(r'Hausdorff distance: (.+?)\(', out)[0])
-            except ValueError:
+            except IndexError:
                 fitness = sys.maxsize
             PopObj[i] = fitness
             if fitness < config.best_fitness:
