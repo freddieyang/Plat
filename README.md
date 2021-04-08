@@ -1,2 +1,2 @@
 # Plat
-My evolutionary computaiton platform
+My evolutionary computation platform.
