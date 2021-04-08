@@ -2,7 +2,7 @@ from Problems.PROBLEM import PROBLEM
 import numpy as np
 
 
-class SOP_F1(PROBLEM):
+class SOP_F2(PROBLEM):
     # Initialization of the problem
     def __init__(self):
         super().__init__()
