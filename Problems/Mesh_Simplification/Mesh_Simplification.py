@@ -6,12 +6,14 @@ from .file_operation import write_file
 import os, subprocess
 import sys
 import config
+import re
 
 
 class Mesh_Simplification(PROBLEM):
     # Initialization of the problem
     def __init__(self, filename, parameter, output):
         super().__init__()
+        self.encoding = 'permutation'
         self.filename = filename
         self.Model = Model(filename)
         self.vertex = self.Model.vertex
@@ -80,11 +82,11 @@ class Mesh_Simplification(PROBLEM):
             p2 = 'tmp.obj'
             para = 'cd %s && metro.exe %s %s' % (current_path, p1, p2)
             rc, out = subprocess.getstatusoutput(para)
-            start_position = out.find('Hausdorff distance:') + 20
-            end_position = out.find('Hausdorff distance:') + 50
-            tmp_str = out[start_position:end_position]
+            # start_position = out.find('Hausdorff distance:') + 20
+            # end_position = out.find('Hausdorff distance:') + 50
+            # tmp_str = out[start_position:end_position]
             try:
-                fitness = float(tmp_str.split(' ')[0])
+                fitness = float(re.findall(r'Hausdorff distance: (.+?)\(', out)[0])
             except ValueError:
                 fitness = sys.maxsize
             PopObj[i] = fitness
