@@ -1,0 +1,4 @@
+from Problems.Mesh_Simplification.Mesh_Simplification import Mesh_Simplification
+from Problems.Simple_Problems.SOP_F1 import SOP_F1
+from Problems.Simple_Problems.SOP_F2 import SOP_F2
+from Problems.Simple_Problems.SOP_F3 import SOP_F3
