@@ -13,6 +13,7 @@ class DE(ALGORITHM):
             self.F = 0.5
         elif len(parameter) == 1:
             self.CR = parameter[0]
+            self.F = 0.5
         else:
             self.CR = parameter[0]
             self.F = parameter[1]
